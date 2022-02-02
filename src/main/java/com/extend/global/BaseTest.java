@@ -11,7 +11,7 @@ public class BaseTest {
 
 //    @BeforeSuite
 //    public static void beforeSuite()
-   {
+   static {
        System.out.println("Executing before suite");
         extent = new ExtentReports();
         ExtentSparkReporter spark = new ExtentSparkReporter("target/reports/index.html");
