@@ -7,9 +7,9 @@ import org.testng.annotations.Test;
 public class LoginTest extends BaseTest {
 
     @Test(groups = {"login"})
-    public void loginTest1(){
+    public void loginTest1() {
         ExtentTest loginTest = extent.createTest("LoginTest1", "Test for login process.");
-        loginTest.assignCategory("login").createNode("Desc","Test for login process.");
+        loginTest.assignCategory("login").createNode("Desc", "Test for login process.");
 
         loginTest.info("step1");
         loginTest.info("step2");
@@ -23,7 +23,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(groups = {"login"})
-    public void loginTest2(){
+    public void loginTest2() {
         ExtentTest loginTest = extent.createTest("LoginTest2");
         loginTest.assignCategory("login");
         loginTest.info("step1");
@@ -33,8 +33,9 @@ public class LoginTest extends BaseTest {
         loginTest.pass("step5");
         extent.flush();
     }
+
     @Test(groups = {"login"})
-    public void loginTest3(){
+    public void loginTest3() {
         ExtentTest loginTest = extent.createTest("LoginTest3");
         loginTest.assignCategory("login");
         loginTest.info("step1");
@@ -46,7 +47,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(groups = {"login"})
-    public void loginTest4(){
+    public void loginTest4() {
         ExtentTest loginTest = extent.createTest("LoginTest4");
         loginTest.assignCategory("login");
         loginTest.info("step1");
@@ -58,7 +59,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(groups = {"login"})
-    public void loginTest5(){
+    public void loginTest5() {
         ExtentTest loginTest = extent.createTest("LoginTest5");
         loginTest.assignCategory("login");
         loginTest.info("step1");

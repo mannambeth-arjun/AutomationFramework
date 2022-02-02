@@ -9,10 +9,10 @@ public class BaseTest {
 
     public static ExtentReports extent;
 
-//    @BeforeSuite
+    //    @BeforeSuite
 //    public static void beforeSuite()
-   static {
-       System.out.println("Executing before suite");
+    static {
+        System.out.println("Executing before suite");
         extent = new ExtentReports();
         ExtentSparkReporter spark = new ExtentSparkReporter("target/reports/index.html");
         extent.attachReporter(spark);

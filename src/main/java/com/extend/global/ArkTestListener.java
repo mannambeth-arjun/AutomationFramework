@@ -12,7 +12,7 @@ public class ArkTestListener implements ITestListener, IAlterSuiteListener {
 
     @Override
     public void alter(List<XmlSuite> suiteList) {
-        List<String> groupMasterList = Arrays.asList("login", "signup");
+        List<String> groupMasterList = Arrays.asList("login", "signup", "payment");
         String commitMsg = System.getProperty("commitMsg", "");
         String[] words = commitMsg.split(" ");
         List<String> groups = new ArrayList<>();
