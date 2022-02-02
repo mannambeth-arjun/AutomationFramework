@@ -9,8 +9,8 @@ public class BaseTest {
 
     public static ExtentReports extent;
 
-    @BeforeSuite
-    public static void beforeSuite()
+//    @BeforeSuite
+//    public static void beforeSuite()
    {
        System.out.println("Executing before suite");
         extent = new ExtentReports();
