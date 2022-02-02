@@ -17,7 +17,7 @@ public class ArkTestListener implements ITestListener, IAlterSuiteListener {
         String commitId = System.getProperty("commitId", "");
         if (commitId != null && commitId.length() > 0) {
             List<String> words = new CommitReader().getCommitKeywords(commitId);
-            List<String> groupMasterList = Arrays.asList("login", "signup", "payment", "cancelplan", "managrplan", "order", "planexpiry", "plan", "promo", "tax");
+            List<String> groupMasterList = Arrays.asList("login", "signup", "payment", "order", "expiry", "plan", "promo", "tax");
             //String[] words = commitMsg.split(" ");
             List<String> groups = new ArrayList<>();
             for (String word : words) {
