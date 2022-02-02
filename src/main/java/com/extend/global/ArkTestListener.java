@@ -12,11 +12,14 @@ public class ArkTestListener implements ITestListener, IAlterSuiteListener {
 
     @Override
     public void alter(List<XmlSuite> suiteList) {
-        List<String> groupMasterList = Arrays.asList("login", "signup", "payment");
         String commitMsg = System.getProperty("commitMsg", "");
-        String[] words = commitMsg.split(" ");
+        String commitId = System.getProperty("commitId", "75930628ec41fc802f2bd94bae8001d54493a577");
+        List<String> words=new CommitReader().getCommitKeywords(commitId);
+        List<String> groupMasterList = Arrays.asList("login", "signup", "payment");
+        //String[] words = commitMsg.split(" ");
         List<String> groups = new ArrayList<>();
         for (String word : words) {
+            word=word.toLowerCase();
             if (groupMasterList.contains(word))
                 groups.add(word);
         }
