@@ -28,7 +28,7 @@ public class CommitReader {
             System.out.println("Fetching github api response for commit : " + commit);
             String commitMsg = jsonPath.getString("commit.message");
             System.out.println("Fetching commit message : " + commitMsg);
-            commitMsg=commitMsg.replaceAll("\\n"," ");
+            commitMsg=commitMsg.replaceAll("\\n\\n"," ");
             List<String> keywords = new ArrayList<>();
             keywords.addAll(Arrays.asList(commitMsg.split(" ")));
             List<String> list = jsonPath.getList("files.filename");
