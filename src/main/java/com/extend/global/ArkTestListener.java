@@ -13,19 +13,21 @@ public class ArkTestListener implements ITestListener, IAlterSuiteListener {
     @Override
     public void alter(List<XmlSuite> suiteList) {
         String commitMsg = System.getProperty("commitMsg", "");
-        String commitId = System.getProperty("commitId", "75930628ec41fc802f2bd94bae8001d54493a577");
-        List<String> words=new CommitReader().getCommitKeywords(commitId);
-        List<String> groupMasterList = Arrays.asList("login", "signup", "payment");
-        //String[] words = commitMsg.split(" ");
-        List<String> groups = new ArrayList<>();
-        for (String word : words) {
-            word=word.toLowerCase();
-            if (groupMasterList.contains(word))
-                groups.add(word);
-        }
-        for (XmlSuite suite : suiteList) {
-            suite.setIncludedGroups(groups);
-            System.out.println("Setting groups : " + groups);
+        String commitId = System.getProperty("commitId", "");
+        if (commitId != null && commitId.length() > 0) {
+            List<String> words = new CommitReader().getCommitKeywords(commitId);
+            List<String> groupMasterList = Arrays.asList("login", "signup", "payment");
+            //String[] words = commitMsg.split(" ");
+            List<String> groups = new ArrayList<>();
+            for (String word : words) {
+                word = word.toLowerCase();
+                if (groupMasterList.contains(word))
+                    groups.add(word);
+            }
+            for (XmlSuite suite : suiteList) {
+                suite.setIncludedGroups(groups);
+                System.out.println("Predicted test case groups : " + groups);
+            }
         }
     }
 

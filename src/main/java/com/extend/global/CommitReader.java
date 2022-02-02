@@ -17,21 +17,28 @@ public class CommitReader {
 
 
     public List<String> getCommitKeywords(String commit) {
-        RestAssured.baseURI = GITHUB_API_BASE_URL;
-        Response response = RestAssured.given()
-                .contentType(ContentType.JSON)
-                .get(GITHUB_PROJECT_PATH + COMMIT_API + "/" + commit)
-                .then().extract().response();
-        JsonPath jsonPath = new JsonPath(response.asString());
-        System.out.println("Reading github api response");
-        String commitMsg = jsonPath.getString("commit.message");
-        List<String> keywords=new ArrayList<>();
-        keywords.addAll(Arrays.asList(commitMsg.split(" ")));
-        List<String> list = jsonPath.getList("files.filename");
-        for(String file:list)
-            keywords.add(file.split("\\.")[0]);
-        System.out.println(keywords);
-        return keywords;
+        try {
+            RestAssured.baseURI = GITHUB_API_BASE_URL;
+            Response response = RestAssured.given()
+                    .contentType(ContentType.JSON)
+                    .get(GITHUB_PROJECT_PATH + COMMIT_API + "/" + commit)
+                    .then().extract().response();
+            JsonPath jsonPath = new JsonPath(response.asString());
+            System.out.println("Reading github api response");
+            String commitMsg = jsonPath.getString("commit.message");
+            System.out.println("Fetching commit message : " + commitMsg);
+            List<String> keywords = new ArrayList<>();
+            keywords.addAll(Arrays.asList(commitMsg.split(" ")));
+            List<String> list = jsonPath.getList("files.filename");
+            System.out.println("Found changes in files : " + list);
+            for (String file : list)
+                keywords.add(file.split("\\.")[0]);
+            System.out.println("Final set of commit keywords : " + keywords);
+            return keywords;
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 
 }
