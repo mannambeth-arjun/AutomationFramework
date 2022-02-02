@@ -20,9 +20,10 @@ public class CommitReader {
         try {
             RestAssured.baseURI = GITHUB_API_BASE_URL;
             Response response = RestAssured.given()
-                    .contentType(ContentType.JSON)
+                    .contentType(ContentType.JSON).log().all()
                     .get(GITHUB_PROJECT_PATH + COMMIT_API + "/" + commit)
-                    .then().extract().response();
+                    .then().log().all()
+                    .extract().response();
             JsonPath jsonPath = new JsonPath(response.asString());
             System.out.println("Fetching github api response for commit : " + commit);
             String commitMsg = jsonPath.getString("commit.message");
