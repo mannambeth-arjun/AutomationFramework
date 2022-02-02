@@ -32,8 +32,10 @@ public class CommitReader {
             keywords.addAll(Arrays.asList(commitMsg.split(" ")));
             List<String> list = jsonPath.getList("files.filename");
             System.out.println("Found changes in files : " + list);
-            for (String file : list)
+            for (String file : list) {
+                file = file.split("/")[file.split("/").length - 1];
                 keywords.add(file.split("\\.")[0]);
+            }
             System.out.println("Final set of commit keywords : " + keywords);
             return keywords;
         } catch (Exception e) {
