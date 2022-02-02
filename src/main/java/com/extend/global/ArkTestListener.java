@@ -1,4 +1,4 @@
-package com.extend.test;
+package com.extend.global;
 
 import org.testng.IAlterSuiteListener;
 import org.testng.ITestListener;
@@ -12,9 +12,8 @@ public class ArkTestListener implements ITestListener, IAlterSuiteListener {
 
     @Override
     public void alter(List<XmlSuite> suiteList) {
-        //List<String> groupMasterList = Arrays.asList("editQuoteLine", "addQuoteLine");
         List<String> groupMasterList = Arrays.asList("login", "signup");
-        String commitMsg = System.getProperty("commitMsg", "edit login etc addQuoteLine");
+        String commitMsg = System.getProperty("commitMsg", "");
         String[] words = commitMsg.split(" ");
         List<String> groups = new ArrayList<>();
         for (String word : words) {
