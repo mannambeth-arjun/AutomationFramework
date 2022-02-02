@@ -24,7 +24,7 @@ public class CommitReader {
                     .get(GITHUB_PROJECT_PATH + COMMIT_API + "/" + commit)
                     .then().extract().response();
             JsonPath jsonPath = new JsonPath(response.asString());
-            System.out.println("Reading github api response");
+            System.out.println("Fetching github api response for commit : " + commit);
             String commitMsg = jsonPath.getString("commit.message");
             System.out.println("Fetching commit message : " + commitMsg);
             List<String> keywords = new ArrayList<>();
@@ -35,7 +35,7 @@ public class CommitReader {
                 keywords.add(file.split("\\.")[0]);
             System.out.println("Final set of commit keywords : " + keywords);
             return keywords;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
         }
