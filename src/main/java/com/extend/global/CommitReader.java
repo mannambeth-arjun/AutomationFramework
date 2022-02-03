@@ -17,6 +17,7 @@ public class CommitReader {
 
 
     public List<String> getCommitKeywords(String commit) {
+        System.out.println("Predicting the impacted test cases");
         try {
             RestAssured.baseURI = GITHUB_API_BASE_URL;
             Response response = RestAssured.given()
@@ -25,9 +26,9 @@ public class CommitReader {
                     .then().log().all()
                     .extract().response();
             JsonPath jsonPath = new JsonPath(response.asString());
-            System.out.println("Fetching github api response for commit : " + commit);
+            //System.out.println("Fetching github api response for commit : " + commit);
             String commitMsg = jsonPath.getString("commit.message");
-            System.out.println("Fetching commit message : " + commitMsg);
+            //System.out.println("Fetching commit message : " + commitMsg);
             commitMsg=commitMsg.replaceAll("\\n\\n"," ");
             List<String> keywords = new ArrayList<>();
             keywords.addAll(Arrays.asList(commitMsg.split(" ")));
@@ -37,7 +38,7 @@ public class CommitReader {
                 file = file.split("/")[file.split("/").length - 1];
                 keywords.add(file.split("\\.")[0]);
             }
-            System.out.println("Final set of commit keywords : " + keywords);
+            //System.out.println("Final set of commit keywords : " + keywords);
             return keywords;
         } catch (Exception e) {
             e.printStackTrace();

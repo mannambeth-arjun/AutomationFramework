@@ -13,12 +13,11 @@ public class ArkTestListener implements ITestListener, IAlterSuiteListener {
 
     @Override
     public void alter(List<XmlSuite> suiteList) {
-        String commitMsg = System.getProperty("commitMsg", "");
-        String commitId = System.getProperty("commitId", "");
+        //String commitMsg = System.getProperty("commitMsg", "");
+        String commitId = System.getProperty("commitId");
         if (commitId != null && commitId.length() > 0) {
             List<String> words = new CommitReader().getCommitKeywords(commitId);
             List<String> groupMasterList = Arrays.asList("login", "signup", "payment", "order", "expiry", "plan", "promo", "tax");
-            //String[] words = commitMsg.split(" ");
             List<String> groups = new ArrayList<>();
             for (String word : words) {
                 word = word.toLowerCase();
@@ -28,10 +27,11 @@ public class ArkTestListener implements ITestListener, IAlterSuiteListener {
                     return;
             }
             groups = groups.stream().distinct().collect(Collectors.toList());
+            System.out.println("The following impacted test flows have been detected : " + groups);
             for (XmlSuite suite : suiteList) {
                 suite.setIncludedGroups(groups);
-                System.out.println("Predicted test case groups : " + groups);
             }
+            System.out.println("Auto triggering test cases for flows : "+ groups);
         }
     }
 
